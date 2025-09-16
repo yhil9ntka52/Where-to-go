@@ -41,7 +41,7 @@ def add_place(request):
         form = PlaceForm()
     return render(request, 'places/add_place.html', {'form': form})
 
-import random
+import random #ignore this comment
 
 def choose_place_weighted(request):
     session_key = get_session_key(request)
