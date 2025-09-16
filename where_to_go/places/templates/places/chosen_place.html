@@ -1,0 +1,31 @@
+{% extends "places/base.html" %}
+{% load static %}
+{% block title %}Обране місце{% endblock %}
+
+{% block content %}
+{% if place %}
+    <h2>{{ place.name }}</h2>
+    {% if place.photo_filename %}
+        <img src="{% static 'places/'|add:place.photo_filename %}" alt="{{ place.name }}" width="300">
+    {% else %}
+        <img src="{% static 'places/default_image.jpg' %}" alt="Фото місця" width="300">
+    {% endif %}
+    <p>{{ place.description }}</p>
+    <p>Тип: {{ place.place_type }}</p>
+    <p>Локація: {{ place.location|default:"Не вказана" }}</p>
+    <p>
+        Рейтинг:
+        {% for i in "12345"|make_list %}
+            {% if forloop.counter <= place.rating %}
+                ★
+            {% else %}
+                ☆
+            {% endif %}
+        {% endfor %}
+    </p>
+    <a href="{% url 'place_detail' place.pk %}">Детальніше</a>
+{% else %}
+    <p>Місць поки немає :(</p>
+{% endif %}
+<a href="{% url 'home' %}" class="btn">На головну</a>
+{% endblock %}

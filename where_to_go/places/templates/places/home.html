@@ -1,0 +1,30 @@
+{% extends "places/base.html" %}
+{% load static %}
+{% block title %}Куди піти в Києві?{% endblock %}
+
+{% block content %}
+<h1>Куди піти в Києві?</h1>
+<p>Web-додаток для вибору улюбленого місця для вечері, прогулянки чи відпочинку.</p>
+
+<!-- Кнопка -->
+<a href="{% url 'choose_place_weighted' %}" class="btn">Куди піти сьогодні?</a>
+
+
+{% if place %}
+    <h2>{{ place.name }}</h2>
+    <p>{{ place.description }}</p>
+    <p>Тип: {{ place.place_type }}</p>
+    <p>Локація: {{ place.location }}</p>
+    <p>
+        Рейтинг:
+        {% for i in "12345"|make_list %}
+            {% if forloop.counter <= place.rating %}
+                ★
+            {% else %}
+                ☆
+            {% endif %}
+        {% endfor %}
+    </p>
+    <a href="{% url 'place_detail' place.pk %}">Детальніше</a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<html lang="uk">
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}Куди піти в Києві?{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'places/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'home' %}">Головна</a> |
+            <a href="{% url 'places_list' %}">Список місць</a> |
+            <a href="{% url 'add_place' %}">Додати місце</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    
+</body>
+</html>

@@ -1,0 +1,34 @@
+{% extends "places/base.html" %}
+{% block title %}Список місць{% endblock %}
+
+{% block content %}
+<h2>Мої улюблені місця</h2>
+{% if places %}
+    <ul class="place-list">
+        {% for place in places %}
+        <li>
+            <h3>
+                <a href="{% url 'place_detail' place.pk %}">{{ place.name }}</a>
+            </h3>
+            <p>{{ place.description|truncatewords:6 }}...</p>
+            <p>Тип: {{ place.place_type }}</p>
+            <p>
+                {% if place.location %}
+                    Локація: {{ place.location }}
+                {% else %}
+                    Secret place👀
+                {% endif %}
+            </p>
+            <p>Рейтинг:
+                {% for i in "12345"|slice:":place.rating"|make_list %}
+                    ★
+                {% endfor %}
+            </p>
+            <p>Відгук: {{ place.created_at|date:"d.m.Y" }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Список порожній.</p>
+{% endif %}
+{% endblock %}

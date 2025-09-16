@@ -1,0 +1,22 @@
+{% extends "places/base.html" %}
+{% block title %}{{ place.name }}{% endblock %}
+
+{% block content %}
+<h2>{{ place.name }}</h2>
+<p>{{ place.description }}</p>
+<p>Тип: {{ place.place_type }}</p>
+<p>
+    {% if place.location %}
+        Локація: {{ place.location }}
+    {% else %}
+        Secret place👀
+    {% endif %}
+</p>
+<p>Рейтинг:
+    {% for i in "12345"|slice:":place.rating"|make_list %}
+        ★
+    {% endfor %}
+</p>
+<p>Дата: {{ place.created_at|date:"d.m.Y" }}</p>
+<a href="{% url 'places_list' %}">Повернутись до списку</a>
+{% endblock %}

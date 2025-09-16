@@ -1,0 +1,24 @@
+{% extends "places/base.html" %}
+{% load static %}
+{% block title %}{{ place.name }}{% endblock %}
+
+{% load static %}
+{% if place.photo_filename %}
+    <img src="{% static 'places/'|add:place.photo_filename %}" alt="Фото {{ place.name }}" width="300">
+{% else %}
+    <img src="{% static 'places/default_image.jpg' %}" alt="Фото місця" width="300">
+{% endif %}
+
+
+{% block content %}
+<h2>{{ place.name }}</h2>
+
+{% if place.photo %}
+    <img src="{{ place.photo.url }}" alt="Фото місця" width="300">
+{% else %}
+    <img src="{% static 'places/default_image.jpg' %}" alt="Фото місця" width="300">
+{% endif %}
+
+<p>{{ place.description }}</p>
+<!-- подальший контент -->
+{% endblock %}
